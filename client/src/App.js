@@ -86,7 +86,7 @@ class App extends Component {
     );
   }
   getPoll = PolliD => {
-    return fetch("/polls:" + PolliD)
+    return fetch("http://localhost:9000/polls:" + PolliD)
       .then(response => {
         //console.log(response);
         return response.json();
