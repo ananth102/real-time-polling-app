@@ -26,11 +26,18 @@ app.use((req, res, next) => {
   }
   next();
 });
-app.get("/", (req, res) => {
-  //Fetch data from database specifcally the part after /
-  //Create a poll and send it
-  res.send("hello");
-});
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html")); // relative path
+  });
+}
+// app.get("/", (req, res) => {
+//   //Fetch data from database specifcally the part after /
+//   //Create a poll and send it
+//   res.send("hello");
+// });
 app.get("/polls:id", (req, res) => {
   //Fetch data from database specifcally the part after /
   //Create a poll and send it
@@ -75,14 +82,6 @@ app.post("/browsePolls", (req, res) => {
   }
   res.send(pollArray);
 });
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html")); // relative path
-  });
-}
 
 let port = process.env.PORT || 9000;
 
