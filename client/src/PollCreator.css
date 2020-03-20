@@ -1,0 +1,26 @@
+#main {
+  margin: auto;
+
+  width: 50%;
+  /* height: 200px; */
+  border: 9px solid green;
+}
+html {
+}
+
+#inside {
+  margin-left: 5ch;
+}
+
+#gtp {
+  margin-left: 5ch;
+  margin-top: 1ch;
+  /*margin-top: 5ch;
+  margin-bottom: 10ch;
+  */
+}
+
+#brs {
+  margin-left: 5ch;
+  margin-top: 1ch;
+}

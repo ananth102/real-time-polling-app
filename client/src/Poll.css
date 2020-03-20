@@ -1,0 +1,10 @@
+#main {
+  margin: auto;
+
+  width: 50%;
+  /* height: 200px; */
+  border: 9px solid green;
+}
+#wo {
+  display: inline-block;
+}
