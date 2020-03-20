@@ -4,6 +4,7 @@ let polls = require("./poll.js");
 let express = require("express");
 let app = express();
 let cors = require("cors");
+let path = require("path");
 
 let bodyParser = require("body-parser");
 
