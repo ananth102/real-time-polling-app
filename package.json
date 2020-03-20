@@ -16,5 +16,8 @@
     "express": "^4.17.1",
     "firebase": "^7.10.0",
     "nodemon": "^2.0.2"
+  },
+  "engines": {
+    "node": "11.3.0"
   }
 }
