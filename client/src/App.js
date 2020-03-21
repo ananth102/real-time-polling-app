@@ -88,7 +88,8 @@ class App extends Component {
     );
   }
   getPoll = PolliD => {
-    return fetch("/polls:" + PolliD)
+    return axios
+      .get("/polls:" + PolliD)
       .then(response => {
         //console.log(response);
         return response.json();
