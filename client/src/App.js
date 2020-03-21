@@ -90,7 +90,7 @@ class App extends Component {
   getPoll = PolliD => {
     console.log("POST");
     return axios.post(PROXY_URL + "/polls", { id: PolliD }).then(response => {
-      console.log("Data", response.data);
+      console.log("Data", response.data, response.data.poll === undefined);
       if (response.data.poll === undefined) return response.data;
       return response.data.poll;
     });
