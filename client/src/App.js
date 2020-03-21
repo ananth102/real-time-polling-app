@@ -8,6 +8,8 @@ import axios from "axios";
 import "./PollBrowser";
 import PollBrowser from "./PollBrowser";
 
+const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
+
 class App extends Component {
   state = {
     poll: {},
@@ -49,7 +51,7 @@ class App extends Component {
     if (this.state.pollCreatorView && this.state.browserView) {
       if (!this.state.refresh) {
         let brow = axios
-          .post("http://localhost:9000/browsePolls", {
+          .post(PROXY_URL + "http://localhost:9000/browsePolls", {
             //range: [0, 1]
           })
           .then(res => {
@@ -86,7 +88,7 @@ class App extends Component {
     );
   }
   getPoll = PolliD => {
-    return fetch("http://localhost:9000/polls:" + PolliD)
+    return fetch(PROXY_URL + "http://localhost:9000/polls:" + PolliD)
       .then(response => {
         //console.log(response);
         return response.json();
@@ -117,7 +119,10 @@ class App extends Component {
   updateVote = (poll, voted, voteIndex, delta) => {
     console.log("dfsfdsffdsf");
     axios
-      .post("http://localhost:9000/", { pollid: poll.id, delta: delta })
+      .post(PROXY_URL + "http://localhost:9000/", {
+        pollid: poll.id,
+        delta: delta
+      })
       .then(res => {
         console.log(res);
       });
@@ -196,11 +201,13 @@ class App extends Component {
     console.log(this.state.optionsPollCreator);
     let pollCreatorView = false;
     let poll = this.createPoll(666, this.state.optionsPollCreator, "apple");
-    axios.post("http://localhost:9000/createPollAPI", poll).then(res => {
-      poll = res.data;
-      this.setState({ pollCreatorView });
-      this.setState({ poll });
-    });
+    axios
+      .post(PROXY_URL + "http://localhost:9000/createPollAPI", poll)
+      .then(res => {
+        poll = res.data;
+        this.setState({ pollCreatorView });
+        this.setState({ poll });
+      });
     //pushTofirebase and that will return a poll object
   };
 
