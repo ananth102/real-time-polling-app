@@ -237,7 +237,7 @@ class App extends Component {
   pollTransitionFromBrows = number => {
     let pollCreatorView = false;
     let browserView = false;
-    axios.post(PROXY_URL + "/polls", { id: PolliD }).then(response => {
+    axios.post(PROXY_URL + "/polls", { id: number }).then(response => {
       this.setState({ browserView });
       this.setState({ pollCreatorView });
       if (response.data.poll === undefined) {
