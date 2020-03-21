@@ -89,7 +89,7 @@ class App extends Component {
   }
   getPoll = PolliD => {
     return axios
-      .get("/polls:" + PolliD)
+      .post("/polls", { id: PolliD })
       .then(response => {
         //console.log(response);
         return response;

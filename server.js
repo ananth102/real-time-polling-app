@@ -43,14 +43,14 @@ if (process.env.NODE_ENV === "production") {
 //   //Create a poll and send it
 //   res.send("hello");
 // });
-app.get("/polls:id", (req, res) => {
+app.post("/polls", (req, res) => {
   //Fetch data from database specifcally the part after /
   //Create a poll and send it
-  let str = req.params.id + "";
-  let sub = str.substring(1, str.length);
+  //let str = req.params.id + "";
+  //let sub = str.substring(1, str.length);
   //console.log(sub);
-  let pol = getPollData(Number(sub));
-  console.log(sub);
+  let pol = getPollData(Number(req.body.id));
+  //console.log(sub);
   pol.then(data => {
     console.log(data);
     res.send(data.poll);
