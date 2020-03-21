@@ -51,7 +51,7 @@ class App extends Component {
     if (this.state.pollCreatorView && this.state.browserView) {
       if (!this.state.refresh) {
         let brow = axios
-          .post(PROXY_URL + "http://localhost:30658/browsePolls", {
+          .post("/browsePolls", {
             //range: [0, 1]
           })
           .then(res => {
@@ -88,7 +88,7 @@ class App extends Component {
     );
   }
   getPoll = PolliD => {
-    return fetch(PROXY_URL + "http://localhost:30658/polls:" + PolliD)
+    return fetch("/polls:" + PolliD)
       .then(response => {
         //console.log(response);
         return response.json();
@@ -119,7 +119,7 @@ class App extends Component {
   updateVote = (poll, voted, voteIndex, delta) => {
     console.log("dfsfdsffdsf");
     axios
-      .post(PROXY_URL + "http://localhost:30658/", {
+      .post("/", {
         pollid: poll.id,
         delta: delta
       })
@@ -201,13 +201,11 @@ class App extends Component {
     console.log(this.state.optionsPollCreator);
     let pollCreatorView = false;
     let poll = this.createPoll(666, this.state.optionsPollCreator, "apple");
-    axios
-      .post(PROXY_URL + "http://localhost:30658/createPollAPI", poll)
-      .then(res => {
-        poll = res.data;
-        this.setState({ pollCreatorView });
-        this.setState({ poll });
-      });
+    axios.post("/createPollAPI", poll).then(res => {
+      poll = res.data;
+      this.setState({ pollCreatorView });
+      this.setState({ poll });
+    });
     //pushTofirebase and that will return a poll object
   };
 

@@ -50,7 +50,9 @@ app.get("/polls:id", (req, res) => {
   let sub = str.substring(1, str.length);
   //console.log(sub);
   let pol = getPollData(Number(sub));
+  console.log(sub);
   pol.then(data => {
+    console.log(data);
     res.send(data.poll);
   });
   //console.log("polllll", pol);
