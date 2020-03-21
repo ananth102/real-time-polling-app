@@ -207,27 +207,29 @@ class App extends Component {
 
   onPollSubmit = () => {
     let pollCreatorView = false;
-    let pol = this.getPoll(this.state.pollFormNumber);
-    let poll = {};
-    pol.then(p => (poll = p));
-    sleep(50).then(() => {
-      //do stuff
-
-      //console.log("dndndndndn");
-
-      if (poll !== undefined) {
-        this.setState({ poll });
-        //console.log(poll);
+    axios
+      .post(PROXY_URL + "/polls", { id: this.state.pollFormNumber })
+      .then(response => {
+        console.log("Data", response.data, response.data.poll === undefined);
         this.setState({ pollCreatorView });
-      }
-    });
+        if (response.data.poll === undefined) {
+          let poll = response.data;
+          this.setState({ poll });
+          console.log(poll);
+        } else {
+          let poll = response.data.poll;
+          this.setState({ poll });
+          console.log(poll);
+        }
+      });
   };
   autoUpdate = pollId => {
-    let pol = this.getPoll(pollId);
-    let poll = {};
-    pol.then(p => (poll = p));
-    sleep(50).then(() => {
-      if (poll !== undefined) {
+    axios.post(PROXY_URL + "/polls", { id: pollId }).then(response => {
+      if (response.data.poll === undefined) {
+        let poll = response.data;
+        this.setState({ poll });
+      } else {
+        let poll = response.data.poll;
         this.setState({ poll });
       }
     });
@@ -235,19 +237,15 @@ class App extends Component {
   pollTransitionFromBrows = number => {
     let pollCreatorView = false;
     let browserView = false;
-    let pol = this.getPoll(number);
-    let poll = {};
-    pol.then(p => (poll = p));
-    sleep(50).then(() => {
-      //do stuff
-
-      //console.log("dndndndndn");
-      console.log("onU", poll);
-      if (poll !== undefined) {
+    axios.post(PROXY_URL + "/polls", { id: PolliD }).then(response => {
+      this.setState({ browserView });
+      this.setState({ pollCreatorView });
+      if (response.data.poll === undefined) {
+        let poll = response.data;
         this.setState({ poll });
-        //console.log(poll);
-        this.setState({ pollCreatorView });
-        this.setState({ browserView });
+      } else {
+        let poll = response.data.poll;
+        this.setState({ poll });
       }
     });
   };
