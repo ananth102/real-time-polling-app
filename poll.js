@@ -60,7 +60,7 @@ function createPoll(poll) {
   //retuns a pollId
   //sets poll to that
   //creates a poll id random ig
-  console.log(poll);
+  //console.log(poll);
   let pollid = Math.floor(Math.random() * 90000);
   while (true) {
     if (initPollList.pollid === undefined) {
@@ -78,7 +78,7 @@ function sleep(milliseconds) {
 }
 
 async function getPollData(pollid) {
-  console.log(polls[pollid]);
+  //console.log(polls[pollid]);
   /*
   return await database
     .ref("polls/" + pollid)
@@ -95,19 +95,23 @@ async function getPollData(pollid) {
 
 function updatePoll(pollid, change) {
   let poll = getPollData(pollid);
-  poll.then(poll => {
+
+  poll.then(pol => {
     //console.log(pollid);
-    let votes = poll.poll.chosenCount;
+    let votes = pol.poll.poll.chosenCount;
+    console.log("ddfsfd", pol.poll.poll);
+    //chosenCount
+
     votes = votes.map((val, index) => {
       return val + change[index];
     });
     //console.log(votes);
-    poll.poll.chosenCount = votes;
-    console.log("up", poll);
-    database.ref("polls/" + pollid).set({ poll: poll });
-    polls[pollid] = poll;
+    pol.poll.poll.chosenCount = votes;
+    //console.log("firebase set", poll);
+    database.ref("polls/" + pollid).set({ poll: pol.poll });
+    polls[pollid] = pol;
 
-    console.log("current pollls", polls);
+    //console.log("current pollls", polls);
   });
 
   //return poll;

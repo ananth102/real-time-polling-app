@@ -44,16 +44,16 @@ app.get("/polls:id", (req, res) => {
   //Create a poll and send it
   let str = req.params.id + "";
   let sub = str.substring(1, str.length);
-  console.log(sub);
+  //console.log(sub);
   let pol = getPollData(Number(sub));
   pol.then(data => {
     res.send(data.poll);
   });
-  console.log("polllll", pol);
+  //console.log("polllll", pol);
 });
 
 app.post("/", (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
   polls.updatePoll(req.body.pollid, req.body.delta);
   res.send("updated Poll");
 });
@@ -88,7 +88,7 @@ let port = process.env.PORT || 9000;
 
 app.listen(port);
 polls.getPollData(1);
-console.log("done");
+console.log("dodsbhbhjsdjhdsfjhfdshjne");
 let currPoll = {};
 
 function getPollData(pollId) {

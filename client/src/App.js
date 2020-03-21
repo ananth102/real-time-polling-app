@@ -50,7 +50,7 @@ class App extends Component {
       if (!this.state.refresh) {
         let brow = axios
           .post("http://localhost:9000/browsePolls", {
-            range: [0, 1]
+            //range: [0, 1]
           })
           .then(res => {
             brow = res.data;
