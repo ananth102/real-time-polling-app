@@ -8,7 +8,7 @@ import axios from "axios";
 import "./PollBrowser";
 import PollBrowser from "./PollBrowser";
 
-const PROXY_URL = "";
+const PROXY_URL = "http://localhost:9000";
 
 class App extends Component {
   state = {
@@ -88,17 +88,11 @@ class App extends Component {
     );
   }
   getPoll = PolliD => {
-    return axios
-      .post("/polls", { id: PolliD })
-      .then(response => {
-        //console.log(response);
-        return response;
-      })
-      .then(data => {
-        if (data.poll === undefined) return data;
-        console.log(data.poll);
-        return data.poll;
-      });
+    return axios.post("/polls", { id: PolliD }).then(response => {
+      if (response.poll === undefined) return data;
+      console.log(response);
+      return response.poll;
+    });
   };
   createPoll = (PolliD, labels, name) => {
     let chosenCount = [];
