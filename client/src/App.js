@@ -92,7 +92,7 @@ class App extends Component {
       .get("/polls:" + PolliD)
       .then(response => {
         //console.log(response);
-        return response.json();
+        return response;
       })
       .then(data => {
         if (data.poll === undefined) return data;
