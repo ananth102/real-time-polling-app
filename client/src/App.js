@@ -51,7 +51,7 @@ class App extends Component {
     if (this.state.pollCreatorView && this.state.browserView) {
       if (!this.state.refresh) {
         let brow = axios
-          .post("/browsePolls", {
+          .post(PROXY_URL + "/browsePolls", {
             //range: [0, 1]
           })
           .then(res => {
@@ -88,10 +88,11 @@ class App extends Component {
     );
   }
   getPoll = PolliD => {
-    return axios.post("/polls", { id: PolliD }).then(response => {
-      if (response.poll === undefined) return response;
-      console.log(response);
-      return response.poll;
+    console.log("POST");
+    return axios.post(PROXY_URL + "/polls", { id: PolliD }).then(response => {
+      //console.log("Data", response.data.poll);
+      //if (response.poll === undefined) return response;
+      return response.data.poll;
     });
   };
   createPoll = (PolliD, labels, name) => {
