@@ -8,7 +8,7 @@ import axios from "axios";
 import "./PollBrowser";
 import PollBrowser from "./PollBrowser";
 
-const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
+const PROXY_URL = "";
 
 class App extends Component {
   state = {
