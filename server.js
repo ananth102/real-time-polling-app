@@ -60,7 +60,9 @@ app.post("/polls", (req, res) => {
 
 app.post("/", (req, res) => {
   //console.log(req.body);
-  polls.updatePoll(req.body.pollid, req.body.delta);
+  //polls.updatePoll(req.body.pollid, req.body.delta);
+  console.log(req.body);
+  polls.updatePollDataFireBase(req.body.pollid, req.body.delta);
   res.send("updated Poll");
 });
 

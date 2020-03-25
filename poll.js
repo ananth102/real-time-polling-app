@@ -77,7 +77,7 @@ function sleep(milliseconds) {
   return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
-async function getPollData(pollid) {
+function getPollData(pollid) {
   //console.log(polls[pollid]);
   /*
   return await database
@@ -93,26 +93,53 @@ async function getPollData(pollid) {
   //send request to firebase
 }
 
+function updatePollDataFireBase(pollid, change) {
+  //console.log(polls[pollid]);
+
+  database
+    .ref("polls/" + pollid)
+    .once("value")
+    .then(snapshot => {
+      //console.log("ddd", snapshot.val());
+      let poll = snapshot.val();
+      //console.log("val", poll);
+      let votes = poll.poll.chosenCount;
+      console.log("ddfsfd", change);
+      //chosenCount
+
+      votes = votes.map((val, index) => {
+        return val + Number(change[index]);
+      });
+      //console.log(votes);
+      poll.poll.chosenCount = votes;
+      //console.log("firebase set", poll);
+      database.ref("polls/" + pollid).set({ poll: poll });
+      polls[pollid] = poll;
+      console.log("updated", polls[pollid]);
+    });
+}
+
 function updatePoll(pollid, change) {
   let poll = getPollData(pollid);
 
-  poll.then(pol => {
-    //console.log(pollid);
-    let votes = pol.poll.poll.chosenCount;
-    console.log("ddfsfd", pol.poll.poll);
-    //chosenCount
+  //poll.then(pol => {
+  //console.log(pollid);
+  //console.log(polls[pollid + ""]);
+  let votes = poll.poll.chosenCount;
+  console.log("ddfsfd", pol.poll.poll);
+  //chosenCount
 
-    votes = votes.map((val, index) => {
-      return val + change[index];
-    });
-    //console.log(votes);
-    pol.poll.poll.chosenCount = votes;
-    //console.log("firebase set", poll);
-    database.ref("polls/" + pollid).set({ poll: pol.poll });
-    polls[pollid] = pol;
-
-    //console.log("current pollls", polls);
+  votes = votes.map((val, index) => {
+    return val + change[index];
   });
+  //console.log(votes);
+  poll.poll.chosenCount = votes;
+  //console.log("firebase set", poll);
+  database.ref("polls/" + pollid).set({ poll: poll });
+  polls[pollid] = poll;
+
+  //console.log("current pollls", polls);
+  //});
 
   //return poll;
   //push to firebased
@@ -141,5 +168,6 @@ module.exports = {
   getPollData: getPollData,
   updatePoll: updatePoll,
   createPoll: createPoll,
-  getAllPolls: getAllPolls
+  getAllPolls: getAllPolls,
+  updatePollDataFireBase: updatePollDataFireBase
 };
