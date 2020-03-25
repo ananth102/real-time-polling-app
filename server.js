@@ -72,22 +72,24 @@ app.post("/createPollAPI", (req, res) => {
 
 app.post("/browsePolls", (req, res) => {
   let pols = polls.getAllPolls();
-  let polKeys = Object.keys(pols);
-  let pollArray = [];
-  let startIndex = 0;
-  let endIndex = polKeys.length > 10 ? 10 : polKeys.length;
-  if (req.body !== undefined) {
-    if (req.body.range !== undefined) {
-      if (typeof req.body.range[0] == Number) {
-        startIndex = req.body.range[0];
-        endIndex = req.body.range[1];
+  pols.then(data => {
+    let polKeys = Object.keys(data);
+    let pollArray = [];
+    let startIndex = 0;
+    let endIndex = polKeys.length > 10 ? 10 : polKeys.length;
+    if (req.body !== undefined) {
+      if (req.body.range !== undefined) {
+        if (typeof req.body.range[0] == Number) {
+          startIndex = req.body.range[0];
+          endIndex = req.body.range[1];
+        }
       }
     }
-  }
-  for (let i = startIndex; i < endIndex; i++) {
-    pollArray.push(pols[polKeys[i]]);
-  }
-  res.send(pollArray);
+    for (let i = startIndex; i < endIndex; i++) {
+      pollArray.push(data[polKeys[i]]);
+    }
+    res.send(pollArray);
+  });
 });
 
 let port = process.env.PORT || 9000;

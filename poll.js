@@ -119,7 +119,7 @@ function updatePoll(pollid, change) {
 }
 
 function getAllPolls() {
-  return polls;
+  return getPollsFromFireBase();
 }
 function getPollsFromAccount(account) {}
 

@@ -266,16 +266,3 @@ const sleep = milliseconds => {
 };
 
 export default App;
-/*
-function App() {
-  return (
-    <div>
-      <h1>Real Time Polling App</h1>
-
-      <React.Fragment>
-        <CardList poll={poll} click={onClickPollButton}></CardList>
-      </React.Fragment>
-    </div>
-  );
-}
-*/
