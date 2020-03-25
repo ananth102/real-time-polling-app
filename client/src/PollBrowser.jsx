@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
+import "./PollBrowser.css";
 class PollBrowser extends Component {
   render() {
     let arr = [];
@@ -24,7 +25,11 @@ class PollBrowser extends Component {
         </div>
       );
     }
-    return <div id="main">{arr}</div>;
+    return (
+      <div id="main">
+        <div id="inside">{arr}</div>
+      </div>
+    );
   }
 }
 
