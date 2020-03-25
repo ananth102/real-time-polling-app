@@ -103,19 +103,19 @@ function updatePollDataFireBase(pollid, change) {
       //console.log("ddd", snapshot.val());
       let poll = snapshot.val();
       //console.log("val", poll);
-      let votes = poll.poll.chosenCount;
-      console.log("ddfsfd", change);
+      let votes = poll.poll.poll.chosenCount;
+      console.log("ddfsfd", poll.poll.poll);
       //chosenCount
 
       votes = votes.map((val, index) => {
         return val + Number(change[index]);
       });
       //console.log(votes);
-      poll.poll.chosenCount = votes;
-      //console.log("firebase set", poll);
+      poll.poll.poll.chosenCount = votes;
+      //console.log("firebase set");
       database.ref("polls/" + pollid).set({ poll: poll });
-      polls[pollid] = poll;
-      console.log("updated", polls[pollid]);
+      polls[pollid] = poll.poll;
+      //console.log("updated", polls[pollid]);
     });
 }
 
