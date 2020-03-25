@@ -25,6 +25,7 @@ class PollBrowser extends Component {
         </div>
       );
     }
+    arr.push(<br></br>);
     return (
       <div id="main">
         <div id="inside">{arr}</div>

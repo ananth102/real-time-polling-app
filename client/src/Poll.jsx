@@ -32,7 +32,12 @@ class Poll extends Component {
         </div>
       );
     }
-    return <div id="main">{items}</div>;
+    items.push(<br></br>);
+    return (
+      <div id="main">
+        <div id="inside">{items}</div>
+      </div>
+    );
   }
 }
 

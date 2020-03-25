@@ -4,6 +4,8 @@
   width: 50%;
   /* height: 200px; */
   border: 9px solid green;
+}
+#inside {
   margin-left: 5ch;
 }
 #wo {
