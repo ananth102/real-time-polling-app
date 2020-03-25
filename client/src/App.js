@@ -17,7 +17,7 @@ class App extends Component {
     voted: false,
     voteIndex: -1,
     pollCreatorView: true,
-    form: { name: "", options: "", checkradio: [] },
+    pollName: "",
     numOptions: 0,
     optionsPollCreator: [],
     pollFormNumber: 0,
@@ -167,6 +167,9 @@ class App extends Component {
       if (pollFormNumber !== undefined) {
         this.setState({ pollFormNumber });
       }
+    } else if (id === "name") {
+      let pollName = val;
+      this.setState({ pollName });
     }
   };
 
@@ -193,10 +196,13 @@ class App extends Component {
   };
 
   onSubmitPollCreator = () => {
-    console.log("ddd");
     console.log(this.state.optionsPollCreator);
     let pollCreatorView = false;
-    let poll = this.createPoll(666, this.state.optionsPollCreator, "apple");
+    let poll = this.createPoll(
+      45,
+      this.state.optionsPollCreator,
+      this.state.pollName
+    );
     axios.post("/createPollAPI", poll).then(res => {
       poll = res.data;
       this.setState({ pollCreatorView });
