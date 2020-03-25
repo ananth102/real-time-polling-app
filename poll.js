@@ -79,15 +79,15 @@ function sleep(milliseconds) {
 
 function getPollData(pollid) {
   //console.log(polls[pollid]);
-  /*
-  return await database
+  //console.log(pollid);
+  return database
     .ref("polls/" + pollid)
     .once("value")
     .then(snapshot => {
-      //console.log("ddd", snapshot.val());
+      console.log("ddd", snapshot.val());
       return snapshot.val();
     });
-    */
+
   //console.log("ddsd", poll);
   return polls[pollid];
   //send request to firebase
